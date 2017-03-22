@@ -1,0 +1,1 @@
+cp console.png ~/.icons
