@@ -2,6 +2,8 @@
 import threading
 import subprocess
 import os
+# import time
+from time import sleep
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Gio
@@ -37,7 +39,7 @@ def launchlog():
         # print stdout_line
         textbuffer = sysview.get_buffer()
         sstart, send = textbuffer.get_bounds()
-        print "insert...."
+        # print "insert...."
         textbuffer.insert(send, stdout_line, len(stdout_line))
 
         if G_SCROLLFLAG == 1:
@@ -47,7 +49,11 @@ def launchlog():
             sysview.scroll_to_mark(mark, 0.0, 0, 0.0, 1.0)
             textbuffer.delete_mark(mark)
 
+        # time.sleep(1)
+        sleep(0.10)
+
     popen.stdout.close()
+    print "antes del wait...."
     return_code = popen.wait()
     if return_code:
         raise subprocess.CalledProcessError(return_code, cmd)
